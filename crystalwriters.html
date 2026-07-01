@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crystal Writers - Home of Creativity</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --crystal-red-dark: #4a000b;
+            --crystal-red: #9e001a;
+            --crystal-red-light: #ff3352;
+            --dark-bg: #0f0103;
+            --card-bg: #1a0407;
+            --text-light: #f5f5f5;
+            --text-muted: #b3a1a3;
+            --gold: #ffd700;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Navigation Bar */
+        header {
+            background: linear-gradient(135deg, var(--crystal-red-dark), var(--dark-bg));
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--crystal-red);
+            box-shadow: 0 4px 20px rgba(158, 0, 26, 0.4);
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 24px;
+            letter-spacing: 1px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .logo i {
+            color: var(--crystal-red-light);
+            text-shadow: 0 0 10px var(--crystal-red-light);
+        }
+
+        /* Container & Views Styling */
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .view {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out forwards;
+        }
+
+        .view.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Typography & Buttons */
+        h1, h2, h3 {
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            text-align: center;
+            text-shadow: 0 0 15px rgba(255, 51, 82, 0.6);
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            font-style: italic;
+            font-size: 1.1rem;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--crystal-red), var(--crystal-red-light));
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 25px;
+            cursor: pointer;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(158, 0, 26, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--crystal-red-light);
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--crystal-red-dark);
+            color: var(--text-muted);
+            padding: 8px 18px;
+            border-radius: 20px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 25px;
+            transition: all 0.2s;
+        }
+
+        .back-btn:hover {
+            background: var(--crystal-red-dark);
+            color: #fff;
+        }
+
+        /* HOME PAGE VIEW */
+        .home-section {
+            background: var(--card-bg);
+            padding: 35px;
+            border-radius: 15px;
+            border: 1px solid var(--crystal-red-dark);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            margin-bottom: 40px;
+        }
+
+        .search-box {
+            position: relative;
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 15px 60px 15px 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid var(--crystal-red-dark);
+            border-radius: 30px;
+            color: white;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-box input:focus {
+            border-color: var(--crystal-red-light);
+            box-shadow: 0 0 15px rgba(255, 51, 82, 0.4);
+        }
+
+        .search-box i {
+            position: absolute;
+            right: 25px;
+            color: var(--crystal-red-light);
+            font-size: 20px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .search-box i:hover {
+            transform: scale(1.2);
+        }
+
+        /* PLACE ORDERS VIEW */
+        .order-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 15px;
+            margin-bottom: 20px;
+        }
+
+        .order-table td {
+            padding: 10px;
+            vertical-align: middle;
+        }
+
+        .order-table td:first-child {
+            width: 30%;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        input[type="date"], input[type="number"], select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--crystal-red-dark);
+            border-radius: 8px;
+            color: white;
+            outline: none;
+            font-size: 15px;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--crystal-red-light);
+        }
+
+        .typing-terminal {
+            font-family: 'Courier New', Courier, monospace;
+            background: #0d0204 !important;
+            border-left: 4px solid var(--crystal-red-light) !important;
+            color: #ffcbd2 !important;
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* LISTS (Writers & Jobs) */
+        .list-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .card-item {
+            background: var(--card-bg);
+            border: 1px solid var(--crystal-red-dark);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-info {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .stars {
+            color: var(--gold);
+        }
+
+        .meta-desc {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        /* PAYMENTS VIEW */
+        .payment-summary {
+            background: rgba(158, 0, 26, 0.15);
+            border: 1px dashed var(--crystal-red-light);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .price-tag {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--crystal-red-light);
+            margin-top: 5px;
+        }
+
+        /* WRITER BIDDING SECTION */
+        .bid-badge {
+            display: inline-block;
+            background: #2a0005;
+            color: #ff3352;
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .success-box {
+            background: rgba(0, 150, 50, 0.1);
+            border: 2px solid #00ff66;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .success-box i {
+            font-size: 50px;
+            color: #00ff66;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo" onclick="goToHome()">
+            <i class="fa-solid fa-gem"></i> Crystal Writers
+        </div>
+    </header>
+
+    <div class="container">
+
+        <div id="home-view" class="view active">
+            <h1>Crystal Writers</h1>
+            <p class="subtitle">Home of Creativity</p>
+
+            <div class="home-section">
+                <h2><i class="fa-solid fa-feather-pointed"></i> Order an Academic Paper</h2>
+                <div class="search-box">
+                    <input type="text" id="topicInput" placeholder="provide topic of interest">
+                    <i class="fa-solid fa-magnifying-glass" onclick="submitTopicSearch()"></i>
+                </div>
+            </div>
+
+            <div class="home-section">
+                <h2><i class="fa-solid fa-briefcase"></i> Writers Seeking Writing Jobs</h2>
+                <p style="color: var(--text-muted); margin-bottom: 20px;">Browse dynamic open orders and apply instantly.</p>
+                <div class="list-container">
+                    <div class="card-item">
+                        <div class="card-info">
+                            <span class="card-title">Quantum Computing Ethics Thesis</span>
+                            <span class="meta-desc">Bidded Price: <strong style="color:#fff;">$90.00</strong></span>
+                        </div>
+                        <button class="btn" onclick="selectJob('Quantum Computing Ethics Thesis', 90)">Select Job</button>
+                    </div>
+                    <div class="card-item">
+                        <div class="card-info">
+                            <span class="card-title">Renaissance Art History Analysis</span>
+                            <span class="meta-desc">Bidded Price: <strong style="color:#fff;">$45.00</strong></span>
+                        </div>
+                        <button class="btn" onclick="selectJob('Renaissance Art History Analysis', 45)">Select Job</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="order-view" class="view">
+            <button class="back-btn" onclick="goBack()"><i class="fa-solid fa-arrow-left"></i> Back</button>
+            <div class="home-section">
+                <h2>Place Orders</h2>
+                <p style="margin-bottom: 20px; color: var(--text-muted)">Selected Topic: <span id="displayTopic" style="color: white; font-weight: bold;"></span></p>
+                
+                <table class="order-table">
+                    <tr>
+                        <td>Deadline:</td>
+                        <td><input type="date" id="orderDeadline" required></td>
+                    </tr>
+                    <tr>
+                        <td>Pages:</td>
+                        <td><input type="number" id="orderPages" min="1" value="1" oninput="calculatePrice()" required></td>
+                    </tr>
+                    <tr>
+                        <td>Referencing Style:</td>
+                        <td>
+                            <select id="orderStyle">
+                                <option value="APA">APA</option>
+                                <option value="MLA">MLA</option>
+                                <option value="Harvard">Harvard</option>
+                                <option value="Vancouver">Vancouver</option>
+                                <option value="Chicago">Chicago</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Instructions:</td>
+                        <td>
+                            <textarea id="orderInstructions" class="typing-terminal" placeholder="Root/Terminal_Instructions: Enter all prompt requirements here..."></textarea>
+                        </td>
+                    </tr>
+                </table>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="btn" onclick="proceedToWriters()">Place Order</button>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="writer-view" class="view">
+            <button class="back-btn" onclick="goBack()"><i class="fa-solid fa-arrow-left"></i> Back</button>
+            <div class="home-section">
+                <h2>Choose Writer</h2>
+                <p style="color: var(--text-muted); margin-bottom: 25px; text-align: center;">All hired platform professionals available below:</p>
+                
+                <div class="list-container">
+                    <div class="card-item">
+                        <div class="card-info">
+                            <span class="card-title">Dr. Elena Rostova</span>
+                            <div class="stars">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <span class="meta-desc">8 Years Experience | Ph.D. in Literature</span>
+                        </div>
+                        <button class="btn" onclick="selectWriter('Dr. Elena Rostova')">Select</button>
+                    </div>
+                    <div class="card-item">
+                        <div class="card-info">
+                            <span class="card-title">Prof. Marcus Vance</span>
+                            <div class="stars">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
+                            </div>
+                            <span class="meta-desc">5 Years Experience | Expert in Sciences</span>
+                        </div>
+                        <button class="btn" onclick="selectWriter('Prof. Marcus Vance')">Select</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="payment-view" class="view">
+            <button class="back-btn" onclick="goBack()"><i class="fa-solid fa-arrow-left"></i> Back</button>
+            <div class="home-section">
+                <h2>Make Payments</h2>
+                
+                <div class="payment-summary">
+                    <p>Total Pages: <span id="summaryPages" style="font-weight: 600;">0</span> pages (at $5 per page)</p>
+                    <p style="margin-top: 5px;">Required upfront payment deposit (Half Price):</p>
+                    <div class="price-tag" id="halfPriceDisplay">$0.00</div>
+                </div>
+
+                <div style="margin-top: 20px;">
+                    <label style="font-weight: 600; display: block; margin-bottom: 8px;">Paste Transaction Message Here:</label>
+                    <textarea id="transactionMessage" class="transaction-box" placeholder="Paste your receipt validation or automated SMS block here..."></textarea>
+                </div>
+
+                <div style="text-align: center; margin-top: 25px;">
+                    <button class="btn" onclick="confirmPayment()">Confirm Payments</button>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="buy-bids-view" class="view">
+            <button class="back-btn" onclick="goBack()"><i class="fa-solid fa-arrow-left"></i> Back</button>
+            <div class="home-section" style="text-align: center;">
+                <h2>Buy Bids to Take Job</h2>
+                <p style="color: var(--text-muted); margin-bottom: 15px;">You selected: <span id="selectedJobName" style="color:white; font-weight:600;"></span></p>
+                
+                <div class="payment-summary" style="max-width: 400px; margin: 20px auto;">
+                    <p>Cost Per Bid Access Token:</p>
+                    <div class="price-tag">$0.945</div>
+                    <span class="bid-badge"><i class="fa-solid fa-clock"></i> Submit work within 3 hours upon unlock</span>
+                </div>
+
+                <div style="text-align: left; margin: 25px 0;">
+                    <label style="font-weight: 600; display: block; margin-bottom: 8px;">Paste Transaction Code/Message:</label>
+                    <textarea id="bidTransactionMessage" class="transaction-box" placeholder="Paste banking receipt message confirmation code..."></textarea>
+                </div>
+
+                <button class="btn" onclick="confirmBidPayment()">Confirm Payments</button>
+
+                <div id="uniqueBidBox" class="success-box" style="display: none; margin-top: 30px;">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <h3>Bid Purchase Confirmed!</h3>
+                    <p style="color: var(--text-muted);">Your uniquely generated Bid Registration Number is:</p>
+                    <div style="font-size: 24px; font-weight: 700; color: var(--gold); letter-spacing: 2px; margin: 15px 0;" id="bidNumberDisplay">CW-XXXXX</div>
+                    <p style="color: #ffcbd2; font-size: 14px;"><i class="fa-solid fa-triangle-exclamation"></i> Countdown started! Submit your solution draft within exactly 3 hours.</p>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="success-view" class="view">
+            <div class="success-box">
+                <i class="fa-solid fa-circle-check"></i>
+                <h2>Order Successful!</h2>
+                <p id="successMessage" style="font-size: 18px; margin-top: 10px; color: #fff;"></p>
+                <button class="btn" style="margin-top: 30px;" onclick="goToHome()">Return to Homepage</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // State variables tracking application navigation flow
+        let navigationHistory = [];
+        let currentView = 'home-view';
+        let itemsPerPageCost = 5;
+        let bidFixedCost = 0.945;
+
+        // Unified View Manager
+        function navigateTo(viewId) {
+            // Push current view onto history stack before altering views
+            if (currentView !== viewId) {
+                navigationHistory.push(currentView);
+            }
+            
+            // Toggle active status in DOM
+            document.querySelectorAll('.view').forEach(view => view.classList.remove('active'));
+            document.getElementById(viewId).classList.add('active');
+            currentView = viewId;
+        }
+
+        // Actionable Back Button Handler
+        function goBack() {
+            if (navigationHistory.length > 0) {
+                let previousView = navigationHistory.pop();
+                document.querySelectorAll('.view').forEach(view => view.classList.remove('active'));
+                document.getElementById(previousView).classList.add('active');
+                currentView = previousView;
+            }
+        }
+
+        function goToHome() {
+            navigationHistory = [];
+            navigateTo('home-view');
+        }
+
+        // Topic input parsing 
+        function submitTopicSearch() {
+            let topicVal = document.getElementById('topicInput').value.trim();
+            if (topicVal === "") {
+                alert("Please provide a topic of interest first.");
+                return;
+            }
+            document.getElementById('displayTopic').innerText = topicVal;
+            navigateTo('order-view');
+        }
+
+        // Calculate and dynamically present operational variables
+        function calculatePrice() {
+            let pages = parseInt(document.getElementById('orderPages').value) || 1;
+            let total = pages * itemsPerPageCost;
+            let depositRequired = total / 2;
+            
+            document.getElementById('summaryPages').innerText = pages;
+            document.getElementById('halfPriceDisplay').innerText = `$${depositRequired.toFixed(2)}`;
+        }
+
+        function proceedToWriters() {
+            let deadline = document.getElementById('orderDeadline').value;
+            if(!deadline) {
+                alert("Please complete the required Deadline form section.");
+                return;
+            }
+            calculatePrice(); // Ensure figures match setup criteria
+            navigateTo('writer-view');
+        }
+
+        function selectWriter(writerName) {
+            // Simulated programmatic hook updates system Admin
+            console.log(`[Admin Update Notice]: Hired Professional "${writerName}" assigned to active workflow pipeline.`);
+            navigateTo('payment-view');
+        }
+
+        function confirmPayment() {
+            let txtMsg = document.getElementById('transactionMessage').value.trim();
+            if(txtMsg === "") {
+                alert("Please paste a valid payment transaction confirmation message.");
+                return;
+            }
+            
+            // Transition success parameters to display panel
+            document.getElementById('successMessage').innerText = "Your order has been successfully placed. We Will update you soon.";
+            
+            // Clean up old values
+            document.getElementById('transactionMessage').value = "";
+            document.getElementById('topicInput').value = "";
+            
+            navigateTo('success-view');
+        }
+
+        // Writers Flow
+        function selectJob(jobTitle, targetValue) {
+            document.getElementById('selectedJobName').innerText = jobTitle;
+            // Clear prior states
+            document.getElementById('bidTransactionMessage').value = "";
+            document.getElementById('uniqueBidBox').style.display = "none";
+            
+            navigateTo('buy-bids-view');
+        }
+
+        function confirmBidPayment() {
+            let bidTxt = document.getElementById('bidTransactionMessage').value.trim();
+            if(bidTxt === "") {
+                alert("Please validate assignment with your authentic payment notification block.");
+                return;
+            }
+
+            // Generate pseudo-cryptographic token matching unique parameters
+            let generateRandomToken = "CW-" + Math.floor(10000 + Math.random() * 90000);
+            
+            document.getElementById('bidNumberDisplay').innerText = generateRandomToken;
+            document.getElementById('uniqueBidBox').style.display = "block";
+        }
+    </script>
+</body>
+</html>
